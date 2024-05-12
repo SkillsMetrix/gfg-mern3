@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="app-title">
+        <header>Online Weather App</header>
+        <input
+          type="text"
+          id="search"
+          placeholder="Enter City"
+          autocomplete="off"
+        />
+        <div class="location-icon">
+          <img src="icons/location.png" alt="" />
+        </div>
+      </div>
+
+      <div class="notification">
+        <div class="weather-container">
+          <div class="weather-icon">
+            <img src="icons/unknown.png" />
+          </div>
+          <div class="temprature-value">
+            <p>*<span>C</span></p>
+          </div>
+          <div class="location">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
