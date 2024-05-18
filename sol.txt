@@ -34,169 +34,39 @@ latitude=position.coords.latitude
 longitude=position.coords.longitude
 getWeather(latitude,longitude)
 }
-function showError(error){
-notificationElement.style.display='block'
-notificationElement.innerHTML=`<p>${error.message}</p>`
-}
 locationIcon.addEventListener('click',function(event){
     console.log('clicked');
     getWeather(latitude,longitude)
 })
-function getWeather(latitude,longitude){
-let api=`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`
+function showError(error){
+notificationElement.style.display='block'
+notificationElement.innerHTML=`<p>${error.message}</p>`
+}
+
+function getWeather(city){
+let api=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
 
 fetch(api).then(function(response){
     let data=response.json()
     console.log(data);
+     return data
+})
+.then(function(data){
+    weather.temprature.value=Math.floor(data.main.temp-KELVIN)
+    weather.description=data.weather[0].description
+    weather.iconId=data.weather[0].icon
+    weather.city=data.name
+    weather.country=data.sys.country
+})
+.then(function(){
+    displayWeather()
 })
 
 }
-
-----
-
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="app.css">
-  </head>
-
-  <body>
-    <div class="container">
-      <div class="app-title">
-        <header>Online Weather App</header>
-        <input
-          type="text"
-          id="search"
-          placeholder="Enter City"
-          autocomplete="off"
-        />
-        <div class="location-icon">
-          <img src="icons/location.png" alt="" />
-        </div>
-      </div>
-
-      <div class="notification">
-        <div class="weather-container">
-          <div class="weather-icon">
-            <img src="icons/unknown.png" />
-          </div>
-          <div class="temprature-value">
-            <p>*<span>C</span></p>
-          </div>
-          <div class="temprature-description">
-            <p></p>
-          <div class="location">
-            <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="app.js"></script>
-  </body>
-</html>
-
-
-
-
----------------
-
-
-
-body{
-    background-image: url('bg.jpg');
-    background-color: steelblue;
-    height: 500px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+function displayWeather(){
+    iconElement.innerHTML=`<img src="icons/${weather.iconId}.png"/>`
+    tempElement.innerHTML=`${weather.temprature.value}* <span>C</span>`
+    descElement.innerHTML=weather.description
+    locationElement.innerHTML=`${weather.city} , ${weather.country}`
 }
-.container{
-    width: 50%;
-    background-color: wheat;
-    align-self: center;
-    display: block;
-    margin: 100px auto;
-    border-radius: 10px;
-    padding-bottom: 50px;
-    box-shadow: 5px 10px 20px black;
-}
-.app-title{
-    width: 100%;
-    height: 150px;
-    border-radius: 10px 10px 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
 
-}
-.app-title header{
-    text-align: center;
-    padding: 15px;
-    margin: 0 auto;
-    font-size: 1.2em;
-    color: blue;
-}
-#search{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px;
-    width: 40%;
-    height: 20px;
-    border-radius: 5px;
-    outline: none;
-    border: 3-x solid steelblue;
-}
-.notification{
-    background-color: white;
-    display: none;
-}
-.notification p{
-    color: maroon;
-    font-size: 1.2em;
-    margin: 0;
-    text-align: center;
-    padding: 10px 0;
-}
-.weather-container{
-    width: 100%;
-    height: 260px;
-    background-color: white;
-    margin-top: 20px;
-}
-.weather-icon img{
-    display: block;
-    margin: 0 auto;
-}
-.location-icon{
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-}
-.location-icon img{
-    display: block;
-    width: 32px;
-    margin: 10px auto;
-    cursor: pointer;
-    padding: 5px;
-    border: steelblue solid 2px;
-    border-radius: 10px;
-    color: steelblue;
-
-}
-.temprature-value p{
-    padding: 0;
-    margin: 0;
-    color: blueviolet;
-    font-size: 4em;
-    text-align: center;
-}
-.temprature-value span{
-    color: blueviolet;
-    font-size: 0.5em;
-}
