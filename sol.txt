@@ -99,3 +99,131 @@ function displayWeather() {
     descElement.innerHTML=weather.description
     locationElement.innerHTML=`${weather.city}, ${weather.country}`
 }
+
+
+
+
+
+
+
+body{
+    background-image: url('bg.jpg');
+    background-color: steelblue;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    width: 50%;
+    background-color: wheat;
+    align-self: center;
+    display: block;
+    margin: 100px auto;
+    border-radius: 10px;
+    padding-bottom: 50px;
+    box-shadow: 5px 10px 20px black;
+}
+.app-title{
+    width: 100%;
+    height: 150px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.app-title header{
+    text-align: center;
+    padding: 15px;
+    margin: 0 auto;
+    font-size: 1.2em;
+    color: blue;
+}
+#search{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    width: 40%;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    border: 3-x solid steelblue;
+}
+.notification{
+    background-color: white;
+    display: none;
+}
+.notification p{
+    color: maroon;
+    font-size: 1.2em;
+    margin: 0;
+    text-align: center;
+    padding: 10px 0;
+}
+.weather-container{
+    width: 100%;
+    height: 260px;
+    background-color: white;
+    margin-top: 20px;
+}
+.weather-icon img{
+    display: block;
+    margin: 0 auto;
+}
+.location-icon{
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+}
+.location-icon img{
+    display: block;
+    width: 32px;
+    margin: 10px auto;
+    cursor: pointer;
+    padding: 5px;
+    border: steelblue solid 2px;
+    border-radius: 10px;
+    color: steelblue;
+
+}
+.temprature-value p{
+    padding: 0;
+    margin: 0;
+    color: blueviolet;
+    font-size: 4em;
+    text-align: center;
+}
+.temprature-value span{
+    color: blueviolet;
+    font-size: 0.5em;
+}
+.temprature-description p{
+    padding: 8px;
+    margin: 0;
+    color: black;
+    text-align: center;
+    font-size: 1.2em;
+}
+.location p{
+    margin: 0;
+    padding: 0;
+    color: black;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+div.relative{
+    position: absolute;
+    top: 600px;
+    right: 120px;
+}
+.location p{
+    margin: 0;
+    padding: 0;
+    color: black;
+    text-align: center;
+    font-size: 0.8em;
+}
