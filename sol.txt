@@ -1,3 +1,4 @@
+
 const iconElement = document.querySelector(".weather-icon")
 const locationIcon = document.querySelector(".location-icon")
 const tempElement = document.querySelector(".temprature-value p")
@@ -99,7 +100,6 @@ function displayWeather() {
     descElement.innerHTML=weather.description
     locationElement.innerHTML=`${weather.city}, ${weather.country}`
 }
-
 
 
 
