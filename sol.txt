@@ -1,16 +1,63 @@
+import React, { useEffect } from 'react';
+import ProductComponent from './ProductComponent';
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import { setProducts } from '../redux/actions/productActions';
+const URL = 'https://fakestoreapi.com/products'
+function ProductList(props) {
+    const products = useSelector(state => state)
+    const dispatch= useDispatch()
+
+    const fetchProducts = async () => {
+        const response = await axios.get(URL)
+         dispatch(setProducts(response.data))
+    }
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+    console.log(products);
+    return (
+        <div className='ui grid container'>
+
+            <ProductComponent />
+        </div>
+    );
+}
+
+export default ProductList;
+
+
+-----
+
+import { ActionTypes } from "../constants/action-types"
+const initialState = {
+    products: []
+}
+export const productReducer = (state = initialState, { type, payload }) => {
+    switch (type) {
+        case ActionTypes.SET_PRODUCTS:
+            return {...state,products:payload};
+        default:
+            return state
+    }
+}
+
+
+----
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 
 function ProductComponent(props) {
     const products = useSelector(state => state.allProducts.products)
-    const { id, title, category } = products[0]
+   // const { id, title, category } = products[0]
     return (
         <div className='four wide column'>
             <div className='ui link cards'>
                 <div className='card'>
                     <div className='image'></div>
                     <div className='content'>
-                        <div className='header'>{title}</div>
+                        {/* <div className='header'>{title}</div> */}
                     </div>
                 </div>
             </div>
