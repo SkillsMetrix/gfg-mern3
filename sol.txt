@@ -1,56 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import Header from './components/Header';
-import { useRoutes } from 'react-router-dom'
-import { routes } from './routes';
-function App() {
-  const appRoute=useRoutes(routes)
-  return (
-    <div className="App">
-      <Header/>
-      {appRoute}
-    </div>
-  );
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+function ProductComponent(props) {
+    const products = useSelector(state => state.allProducts.products)
+    const { id, title, category } = products[0]
+    return (
+        <div className='four wide column'>
+            <div className='ui link cards'>
+                <div className='card'>
+                    <div className='image'></div>
+                    <div className='content'>
+                        <div className='header'>{title}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default App;
-
-
-------
-
-import ProductList from "./components/ProductList";
-
-
-export const routes=[
-    {path:"/" ,element:<ProductList/>}
-]
--------
-
-
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import rootReducer from './redux/store';
-import { BrowserRouter } from 'react-router-dom'
-const appStore= createStore(rootReducer,
-{},
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-
-
-)
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={appStore}>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-   
-  </Provider>
-);
-
-
-reportWebVitals();
+export default ProductComponent;
