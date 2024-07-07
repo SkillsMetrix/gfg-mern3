@@ -1,3 +1,32 @@
+import logo from './logo.svg';
+import './App.css';
+import Header from './components/Header';
+import { useRoutes } from 'react-router-dom'
+import { routes } from './routes';
+function App() {
+  const appRoute=useRoutes(routes)
+  return (
+    <div className="App">
+      <Header/>
+      {appRoute}
+    </div>
+  );
+}
+
+export default App;
+
+
+------
+
+import ProductList from "./components/ProductList";
+
+
+export const routes=[
+    {path:"/" ,element:<ProductList/>}
+]
+-------
+
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -6,80 +35,22 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './redux/store';
-const appStore= createStore(rootReducer)
+import { BrowserRouter } from 'react-router-dom'
+const appStore= createStore(rootReducer,
+{},
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+
+)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={appStore}>
+    <BrowserRouter>
     <App />
+    </BrowserRouter>
+   
   </Provider>
 );
 
 
 reportWebVitals();
-
-
-
------
-
-
-import { combineReducers } from 'redux'
-import { productReducer } from './reducers/productReducer'
- 
-
-
-const rootReducer=combineReducers({
-    allProducts:productReducer
-})
-
-export default rootReducer
-
-
-----
-
-
-
-export const ActionTypes={
-    SET_PRODUCTS:"SET_PRODUCTS",
-    SELECTED_PRODUCT:"SELECTED_PRODUCT",
-    REMOVE_SELECTED_PRODUCT:"REMOVE_SELECTED_PRODUCT"
-}
-
-----
-
-import { ActionTypes } from "../constants/action-types"
-
-export const setProducts = (products) => {
-    return {
-        type: ActionTypes.SET_PRODUCTS,
-        payload: products
-
-    }
-}
-export const seelectedProduct = (product) => {
-    return {
-        type: ActionTypes.SELECTED_PRODUCT,
-        payload: product
-
-    }
-}
-
-----
-
-import { ActionTypes } from "../constants/action-types"
-const initialState = {
-    products: [
-        {
-            id: 101,
-            title: 'mobile',
-            category: 'Electronics'
-        }
-    ]
-}
-export const productReducer = (state = initialState, { type, payload }) => {
-    switch (type) {
-        case ActionTypes.SET_PRODUCTS:
-            return state;
-        default:
-            return state
-    }
-}
